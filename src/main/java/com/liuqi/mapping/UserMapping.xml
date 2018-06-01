@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuqi.mapper.UserMapper" >
+
+	<select id="getPassword" resultType="com.liuqi.entity.UserBean">
+		SELECT
+			user_id AS "userId",
+			user_name AS "userName",
+			password AS "password",
+			e_mail AS "email"
+		FROM lq_user
+		WHERE
+			user_name = #{userName}
+	</select>
+</mapper>

@@ -1,0 +1,1 @@
+Controller存放控制器类，Entity存放实体类，Mapper存放数据接口，Mapping存放SqL语句的xml，Service存放业务逻辑接口，Utils存放工具类

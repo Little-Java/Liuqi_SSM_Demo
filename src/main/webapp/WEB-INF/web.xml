@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://java.sun.com/xml/ns/javaee"
+		xsi:schemaLocation="
+			http://java.sun.com/xml/ns/javaee
+			shttp://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		version="3.0">
+	<display-name>Archetype Created Web Application</display-name>
+	
+	<!-- 配置前端控制器 -->
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<!-- ContextconfigLocation配置springmvc加载的配置文件适配器、处理映射器等 -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath*:config/spring-mvc.xml</param-value>
+			<load-on-startup>1</load-on-startup>
+			<!-- 标签的默认取值为 false，要启用异步处理支持，则将其设为 true -->
+			<!-- <async-supported>true</async-supported> -->
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<!-- 1、.action访问以.action结尾的  由DispatcherServlet进行解析
+		2、"/":所有访问都由DispatcherServlet进行解析 -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- 配置spring容器 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:config/applicationContext.xml</param-value>
+	</context-param>
+	
+	<!-- 配置一个监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 防止Spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- 解决post乱码问题的过滤器 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Session过期时间配置，以分为单位 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
